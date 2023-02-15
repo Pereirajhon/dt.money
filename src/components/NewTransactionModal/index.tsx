@@ -1,47 +1,44 @@
 import Modal from 'react-modal';
-import {useForm} from 'react-hook-form'
-import React, {useState, useContext, useRef} from 'react' ;
+import {useForm, SubmitHandler} from 'react-hook-form'
+import React, {useState, useContext} from 'react' ;
 import { ContainerModal, BtnsContainer, RadioBox } from './styles';
-import arrowDown from '../../assets/arrow-circle-down-regular.png'
-import arrowUp from '../../assets/arrow-circle-up-regular.png'
-import {CreateTransactions} from '../../Context/TransactionsContext'
-import { ITransactionInput, ITransaction} from '../../Context/TransactionsContext';
+import {ArrowCircleUp, ArrowCircleDown} from 'phosphor-react'
+import {transactionsContext} from '../../Context/TransactionsContext'
+//import { ICreateTransactionInput} from '../../Context/TransactionsContext';
 
 type PropsModal = {
     isOpen: boolean,
     onRequestClose: () => void,
 } 
 
+type NewTransactionInputs = {
+    title: string,
+    price: string,
+    category: string,
+}
 
 export const NewTransactionModal = ({isOpen, onRequestClose}:PropsModal) => {
-    const [typ, setTyp] = useState('')
 
-    const {onSubmitData, transactions}= useContext(CreateTransactions)
+    const [typeValue, setTypeValue] = useState('withDown' || 'deposit')
 
-    const {handleSubmit, register,formState: {isSubmitting}, reset}: any = useForm<ITransactionInput>()
+    const {createTransaction}= useContext(transactionsContext)
 
-    const handleNewTransaction = async(data: ITransactionInput) => {
+    const {handleSubmit, register, formState:{isSubmitting}, reset} = useForm<NewTransactionInputs>()
 
-        const {category, title, price, type} = data
+    const handleNewTransaction: SubmitHandler<NewTransactionInputs> = async(data) => {
 
-        if(typ === 'positive' ){
-            type.withDown = price
-        }else if(typ === 'negative'){
-            type.deposit = price
-        }
+        const {category, title, price} = data
 
-        await onSubmitData({
+        await createTransaction({
             category,
             title,
-            type,
+            type: typeValue === 'withDown' ? {withDown: price} : {deposit: price},
             price,
         })
 
         onRequestClose()
         reset()
     }
-
-    //console.log(title)
 
     return(
         <Modal
@@ -56,54 +53,47 @@ export const NewTransactionModal = ({isOpen, onRequestClose}:PropsModal) => {
                 <input
                  type='text' 
                  placeholder='Descrição' 
+                 {...register('title',{required: true})}
                  name='title'
-                 {... register('title')}
-                 
                  />
 
                 <input
                  type="text" 
                  placeholder='Preço' 
+                 {...register('price',{required: true})}
                  name='price'
-                 {...register('price', {valueAsNumber: true})}
-                 
                 />
 
                 <input
                  type='text' 
-                 placeholder='Categoria'
-                 name = 'category' 
-                 {...register('category')}           
+                 placeholder='Categoria' 
+                 {...register('category',{required: true})}    
+                 name= 'category'       
                 />
 
-                <BtnsContainer    
-                    >  
-                    <RadioBox      
+                <BtnsContainer>  
+                    <RadioBox     
                         type='button'
-                        name= 'withDown'  
-                        onClick={() => setTyp('positive') }        
-                        isActive={typ === 'positive'}            
-                        className= {typ === 'positive' ? 'withDown' : ''}
-                       // value= {'withDown' === type ? type : ''}   
-                        {...register('type.withDown')}               
-                    >
-                        <img src={arrowDown} alt='icone entrada' />
+                        onClick= {() => setTypeValue('withDown')}
+                        isActive={typeValue === 'withDown'}         
+                        className={typeValue === 'withDown' ? 'withDown' : ''}     
+                    >  
+                        <ArrowCircleUp size={30} color={typeValue==='withDown'? '#ffffff': '#00B37E'} />
                         Entrada
                     </RadioBox> 
 
-                    <RadioBox
-                        type='button'
-                        name ='deposit'
-                        onClick= {() => setTyp('negative')}
-                        isActive={typ === 'negative'}         
-                        className={typ === 'negative' ? 'deposit' : ''}
-                        {...register('type.deposit')}
+                    <RadioBox 
+                     type='button'
+                     onClick={() => setTypeValue('deposit') }        
+                     isActive={typeValue === 'deposit'}            
+                     className= {typeValue === 'deposit' ? 'deposit' : ''}
                     >
-                        <img src={arrowUp} alt='icone saída' />
+                        <ArrowCircleDown size={30} 
+                        color={typeValue==='deposit' ?'#ffffff': '#f65a68'}  />
                         Saída
                     </RadioBox>    
                 </BtnsContainer>  
- 
+
                 <button type='submit' disabled={isSubmitting}> Cadastrar</button>
             </ContainerModal>
         </Modal>

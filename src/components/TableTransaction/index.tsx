@@ -1,12 +1,11 @@
-import {useState, useEffect} from 'react';
 import {ContainerTable} from './styles' ;
 import {useContext} from 'react';
-import {CreateTransactions} from '../../Context/TransactionsContext'
+import {transactionsContext} from '../../Context/TransactionsContext'
 import { currencyFormatter, dateFormatter } from '../../utils/formatter';
 
 export const TableTransaction = () => {
     
-    const {transactions} = useContext(CreateTransactions)
+    const {transactions} = useContext(transactionsContext)
 
     return (
         <ContainerTable>
@@ -25,7 +24,10 @@ export const TableTransaction = () => {
                         transactions.map((transaction) => (
                             <tr key={transaction.id}>
                                 <td>{transaction.title}</td>
-                                <td className= 'positive' >
+                                <td 
+                                 className={transaction.type?.withDown?
+                                 'positive': 'negative'}
+                                >
                                     {currencyFormatter.format(transaction.price) }
                                 </td>
                                 <td>{transaction.category}</td>

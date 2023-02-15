@@ -1,11 +1,8 @@
 import { ContainerSearch} from './style';
-import iconeSearch from '../../assets/search.png';
-import { Colors } from '../../Styles/colors';
+import {MagnifyingGlass} from 'phosphor-react';
 import {useForm} from 'react-hook-form'
 import { useContext } from 'react';
-import { CreateTransactions } from '../../Context/TransactionsContext';
-import { SubmitHandler } from 'react-hook-form';
-import {ITransaction} from '../../Context/TransactionsContext'
+import { transactionsContext } from '../../Context/TransactionsContext';
 
 type SearchInputs = {
     query : string,
@@ -13,7 +10,7 @@ type SearchInputs = {
 
 export const Search = () => {
 
-    const {fetchTransactions} = useContext(CreateTransactions)
+    const {fetchTransactions} = useContext(transactionsContext)
 
     const {
         register, 
@@ -23,21 +20,20 @@ export const Search = () => {
 
     const handleSearch = async(data: SearchInputs ) => {
         console.log(data.query)
-         const res = await fetchTransactions(data.query)
+        await fetchTransactions(data.query)
     }
 
     return (
-            <ContainerSearch onSubmit={handleSubmit(handleSearch)} >
-                
+        <ContainerSearch onSubmit={handleSubmit(handleSearch)} >         
             <input
              type='text'
              placeholder='Busque uma transação'
              {...register('query')}
-              />
+            />
 
-            <button type='submit' >
-                 <img src={iconeSearch} alt='icone de busca'/>
-                 <strong>
+            <button type='submit' disabled={isSubmitting}>
+                <MagnifyingGlass size={24}/>
+                <strong>
                     Buscar 
                 </strong>
             </button>

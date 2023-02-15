@@ -1,11 +1,10 @@
+import {api} from '../lib/axios'
 import React, { 
     createContext,
     useState, 
     useEffect, 
     useCallback 
 } from "react";
-
-import axios from 'axios';
 
 type ChildrenProp = {
     children : React.ReactNode
@@ -14,79 +13,74 @@ type ChildrenProp = {
 export interface ITransaction {
     id: number,
     title: string,
-    category : string,
+    category: string,
     price: number,
-    type :  any,
+    type : { withDown: number, deposit: number } 
     createdAt : string,
 }
 
-export interface ITransactionInput {
+export interface ICreateTransactionInput {
     title: string,
     price : string,
     category : string,
-    type : any,
+    type: { withDown?: string, deposit?: string},
 }
 
 interface ITransactionInputTypes { 
     transactions : ITransaction[],
     setTransactions : (transactions:ITransaction[]) => void,
-    onSubmitData : (data :ITransactionInput) => Promise<void>
+    createTransaction : (data :ICreateTransactionInput) => Promise<void>
     fetchTransactions: (query: string) => Promise<void>
 } 
 
-export const CreateTransactions = createContext<ITransactionInputTypes>({} as ITransactionInputTypes)
+export const transactionsContext = createContext<ITransactionInputTypes>(
+    {} as ITransactionInputTypes
+)
 
-
-export const TransactionsContextProvider = ({children}: ChildrenProp)=> {
-
-    const url = 'http://localhost:3000/transactions'
+export const TransactionsContextProvider = ({children}: ChildrenProp) => {
 
     const [transactions, setTransactions] = useState<ITransaction[]>([])
     
     useEffect(() => {
-        axios.get(url)
+        api.get('/transactions')
         .then(res => setTransactions(res.data))
         .catch(e => console.error(e)) 
         console.log(transactions)
-    },[url])
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
-    const onSubmitData = useCallback(async (data:ITransactionInput ) => {
+    const createTransaction = useCallback(async (data:ICreateTransactionInput ) => {
 
-        await axios.post(url,{
+        const response = await api.post('/transactions',{
             ...data,
-            createdAt: new Date(),
+            createdAt: new Date()
         })
 
-        //const json =  response.data.data
-
-        //setTransactions(prev => [...prev, json])
-        
-        console.log(transactions)
+        setTransactions(prev => [response.data, ...prev])
     },[])
 
     const fetchTransactions = useCallback(async(query?: string) => {
 
-        const response = await axios.get(url,{
+        const response = await api.get('/transactions',{
             params: {
                 q: query,
             }
         })
 
         console.log(response.data)
-
         setTransactions(response.data)
-
     },[])
 
     useEffect(() => {
         fetchTransactions()
-        
     },[fetchTransactions])
 
 
-    return <CreateTransactions.Provider value= {{setTransactions,transactions, onSubmitData, fetchTransactions}} >
-        {children}
-    </CreateTransactions.Provider>
-
+    return (
+        <transactionsContext.Provider 
+         value= {{setTransactions, transactions, createTransaction, fetchTransactions}}>
+            {children}
+        </transactionsContext.Provider>
+    )
 }

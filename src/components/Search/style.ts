@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 import styled from "styled-components";
 import { Colors } from "../../Styles/colors";
 
@@ -21,9 +20,9 @@ export const ContainerSearch = styled.form`
     }
 
     button{
-        border: 1px solid ${Colors.btnSearch};
+        border: 2px solid ${Colors.btnSearch};
         background-color: transparent ;
-        color: #ffffff;
+        color: #fff;
         border-radius: 0.20rem ;
         font-size: 1rem;
         padding: 0 2rem;
@@ -31,7 +30,9 @@ export const ContainerSearch = styled.form`
         align-items: center;
         justify-content: center;
         gap: 0.4rem;
-
+        svg{
+            color: ${Colors.btnSearch};
+        }
 
     }
 

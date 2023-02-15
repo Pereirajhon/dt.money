@@ -39,7 +39,6 @@ export const ContainerModal = styled.form`
             filter: brightness(0.8);
         }
     }
-
 `;
 
 export const BtnsContainer = styled.div`
@@ -62,12 +61,18 @@ export const RadioBox = styled.button<TransactionBtnVariants>`
     background-color: ${Colors.grid};
 
     &.withDown{
-    background-color: ${Colors.cardSaida};
+        background-color: ${Colors.darkgreen};
+        svg{
+            color: '#fff'
+        } 
+           
     }
 
     &.deposit{
-        background-color: ${Colors.darkgreen};
-     
+        background-color: ${Colors.cardSaida};
+        svg {
+            color: "#fff"
+        }
     }
 
 `
