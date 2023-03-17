@@ -31,6 +31,10 @@ export const ContainerTable = styled.div`
                 color: ${Colors.negative}
             }
         }
+
+        @media(max-width: 480px){
+            
+        }
     }
 
 `
