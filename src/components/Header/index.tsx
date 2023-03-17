@@ -7,13 +7,15 @@ type Props = {
 
 export const Header = ({onOpenModalTransaction}: Props) => {
     
-
     return (
         <>
             <Container>
                 <Content>
                     <img src={logo} alt='logo' />
-                    <button type='button' onClick={onOpenModalTransaction}>
+                    <button
+                     type='button'
+                     onClick={onOpenModalTransaction}
+                    >
                         Nova transição
                     </button>
                 </Content>

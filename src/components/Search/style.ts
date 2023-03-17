@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { Colors } from "../../Styles/colors";
 
 export const ContainerSearch = styled.form`
-
     max-width: 1120px;
+    width: 100%;
     display: flex;
     margin: auto;  
     margin-top: 1rem;
@@ -20,10 +20,10 @@ export const ContainerSearch = styled.form`
     }
 
     button{
-        border: 2px solid ${Colors.btnSearch};
+        border: 3px solid${Colors.btnSearch};
         background-color: transparent ;
         color: #fff;
-        border-radius: 0.20rem ;
+        border-radius: 6px ;
         font-size: 1rem;
         padding: 0 2rem;
         display: flex;
@@ -32,6 +32,7 @@ export const ContainerSearch = styled.form`
         gap: 0.4rem;
         svg{
             color: ${Colors.btnSearch};
+            font-weight: bold;
         }
 
     }

@@ -1,38 +1,33 @@
 import { DashboardContainer, Card } from "./styles"
-import arrowDown from '../../assets/arrow-circle-down-regular.png';
-import arrowUp from '../../assets/arrow-circle-up-regular.png';
+import arrowDown from '../../assets/arrow-circle-down-regular.svg';
+import arrowUp from '../../assets/arrow-circle-up-regular.svg';
 import dolarTotal from '../../assets/currency-dollar-regular.png';
 
-import { useContext, useEffect } from "react";
-import { CreateTransactions } from "../../Context/TransactionsContext";
+import { useContext } from "react";
+import { transactionsContext } from "../../Context/TransactionsContext";
 import { currencyFormatter } from "../../utils/formatter";
-
 
 export const Dashboard = () => {
 
-  const {transactions} = useContext(CreateTransactions)
+  const {transactions} = useContext(transactionsContext)
 
-  const summaryTotal = transactions.reduce((acc, transaction) => {
-
-    if(transaction.type?.withDown ){
-      acc.withDowns += transaction.price
-      acc.total += transaction.price
-
-    }else {
-      acc.deposits -= transaction.price
-      acc.total -= transaction.price
-    
-    }
-      return acc ;
-    },{
-      deposits : 0,
-      withDowns : 0,
-      total: 0
-    }
-  )
+  const summaryTotal = transactions.reduce((acc, transaction)=> {
+      if(transaction.type?.withDown){
+        acc.withDowns += transaction.price
+        acc.total += transaction.price
+  
+      }else {
+        acc.deposits -= transaction.price
+        acc.total -= transaction.price
+      }
+        return acc ;
+      },{
+        deposits : 0,
+        withDowns : 0,
+        total: 0
+      })
 
   console.log(summaryTotal)
-    
 
     return (
 
@@ -57,7 +52,7 @@ export const Dashboard = () => {
               <p>Total</p> 
               <img src={dolarTotal} alt='icone dólar' />
             </header>
-            <strong>{ currencyFormatter.format(summaryTotal.total)  }</strong>
+            <strong>{currencyFormatter.format(summaryTotal.total) }</strong>
         </Card>
 
       </DashboardContainer>
