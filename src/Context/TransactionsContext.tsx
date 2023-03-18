@@ -15,24 +15,27 @@ export interface ITransaction {
     title: string,
     category: string,
     price: number,
-    type : { withDown?: number, deposit?: number } 
+    type : { withDown: number, deposit: number } 
     createdAt : string,
 }
 
 export interface ICreateTransactionInput {
     title: string,
-    category: string,
-    price: number,
-    type: { withDown?: number, deposit?: number},
+    price : string,
+    category : string,
+    type: { withDown?: string, deposit?: string},
 }
 
 interface ITransactionInputTypes { 
     transactions : ITransaction[],
-    createTransaction: (data :ICreateTransactionInput) => Promise<void>,
+    setTransactions : (transactions:ITransaction[]) => void,
+    createTransaction : (data :ICreateTransactionInput) => Promise<void>
     fetchTransactions: (query: string) => Promise<void>
 } 
 
-export const transactionsContext = createContext<ITransactionInputTypes>({} as ITransactionInputTypes)
+export const transactionsContext = createContext<ITransactionInputTypes>(
+    {} as ITransactionInputTypes
+)
 
 export const TransactionsContextProvider = ({children}: ChildrenProp) => {
 
@@ -76,7 +79,7 @@ export const TransactionsContextProvider = ({children}: ChildrenProp) => {
 
     return (
         <transactionsContext.Provider 
-         value= {{transactions, createTransaction, fetchTransactions}}>
+         value= {{setTransactions, transactions, createTransaction, fetchTransactions}}>
             {children}
         </transactionsContext.Provider>
     )

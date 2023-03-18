@@ -4,6 +4,7 @@ import React, {useState, useContext} from 'react' ;
 import { ContainerModal, BtnsContainer, RadioBox } from './styles';
 import {ArrowCircleUp, ArrowCircleDown} from 'phosphor-react'
 import {transactionsContext} from '../../Context/TransactionsContext'
+//import { ICreateTransactionInput} from '../../Context/TransactionsContext';
 
 type PropsModal = {
     isOpen: boolean,
@@ -12,7 +13,7 @@ type PropsModal = {
 
 type NewTransactionInputs = {
     title: string,
-    price: number,
+    price: string,
     category: string,
 }
 
@@ -40,15 +41,13 @@ export const NewTransactionModal = ({isOpen, onRequestClose}:PropsModal) => {
     }
 
     return(
-        <Modal 
+        <Modal
         isOpen={isOpen}
         onRequestClose={onRequestClose}
         overlayClassName='react-modal-overlay'
         className='react-modal-content'
         >
-            <ContainerModal
-             onSubmit={handleSubmit(handleNewTransaction)} 
-             >
+            <ContainerModal onSubmit={handleSubmit(handleNewTransaction)} >
                 <h2>Nova transação</h2>
 
                 <input
@@ -61,8 +60,8 @@ export const NewTransactionModal = ({isOpen, onRequestClose}:PropsModal) => {
                 <input
                  type="text" 
                  placeholder='Preço' 
-                 {...register('price',{required: true, valueAsNumber: true})}
-                 name= 'price'
+                 {...register('price',{required: true})}
+                 name='price'
                 />
 
                 <input

@@ -3,6 +3,21 @@ import { Colors } from './colors'
 
 export const GlobalStyle = createGlobalStyle`
 
+/*:root {
+    --header: #000000;
+    --background:#202024;
+    --positive : #00B37E;
+    --negative : #AA2834;
+    --card-saida: #F75A68; 
+    --card-entrada: #00B37E;
+    --dark-green: #015F43;
+    --text-color-card : #E1E1E6;
+    --search: #121214;
+    --button-search : #00B37E;
+    --grid : #29292E;
+    --text-base: #C4C4CC;  
+} */
+
 *{
     margin: 0;
     padding: 0;
@@ -17,16 +32,13 @@ html {
     @media (max-width : 760px) {
         font-size: 87.5%;
     }
-    @media (max-width: 480px){
-        font-size: 81.25%;
-    }
 }
 
 body{
     background-color: ${Colors.background};
     color: ${Colors.textBase};
     -webkit-font-smoothing: antialiased;
-    
+
 }
 
 body, input, button, textarea {
@@ -65,7 +77,8 @@ button{
     width: 100%;
     padding: 3rem;
     border-radius: 0.5rem;
-  
+
+    
 }
 
 `

@@ -8,24 +8,125 @@
       "createdAt": "2022-11-10 11:00:00"
     },
     {
-      "category": "Alimentos",
-      "title": "Leite",
+      "category": "frgg",
+      "title": "eojfoier",
       "type": {
-        "deposit": 5
+        "withDown": "",
+        "deposit": ""
       },
-      "price": 5,
-      "createdAt": "2023-03-17T14:46:10.761Z",
-      "id": "U3hcyxU"
+      "price": 399,
+      "createdAt": "2022-11-18T13:59:41.677Z",
+      "id": "w652tBQ"
     },
     {
-      "category": "Renda",
-      "title": "Sálario",
+      "category": "ckrjbf",
+      "title": "rgbrughtu",
       "type": {
-        "withDown": 2000
+        "withDown": 1000,
+        "deposit": ""
+      },
+      "price": 1000,
+      "createdAt": "2022-11-18T14:00:01.686Z",
+      "id": "2RzTuFm"
+    },
+    {
+      "category": "Comida",
+      "title": "Ifood",
+      "type": {
+        "withDown": "",
+        "deposit": 100
+      },
+      "price": 100,
+      "createdAt": "2022-11-19T03:07:23.642Z",
+      "id": "tKhuPyB"
+    },
+    {
+      "category": "Roupa",
+      "title": "Camisa",
+      "type": {
+        "withDown": "",
+        "deposit": 99
+      },
+      "price": 99,
+      "createdAt": "2022-11-19T14:41:07.672Z",
+      "id": "W2qVlHZ"
+    },
+    {
+      "category": "Item",
+      "title": "Celular",
+      "type": {
+        "withDown": "",
+        "deposit": 1999
+      },
+      "price": 1999,
+      "createdAt": "2022-11-19T14:42:09.958Z",
+      "id": "w1kFyh6"
+    },
+    {
+      "category": "Limpeza",
+      "title": "Sabão ",
+      "type": {
+        "withDown": "",
+        "deposit": 10
+      },
+      "price": 10,
+      "createdAt": "2022-11-19T14:43:01.307Z",
+      "id": "1G3XIo6"
+    },
+    {
+      "category": "Educaçao",
+      "title": "Caderno",
+      "type": {
+        "withDown": "",
+        "deposit": 20
+      },
+      "price": 20,
+      "createdAt": "2022-11-19T15:01:34.727Z",
+      "id": "j6Zh1Ls"
+    },
+    {
+      "category": "Item",
+      "title": "Notebook",
+      "type": {
+        "withDown": "",
+        "deposit": 2000
       },
       "price": 2000,
-      "createdAt": "2023-03-17T14:49:01.126Z",
-      "id": "93WPlQ7"
+      "createdAt": "2022-11-19T15:03:14.350Z",
+      "id": "zE9YBXP"
+    },
+    {
+      "category": "Comida",
+      "title": "tes",
+      "type": {
+        "withDown": "",
+        "deposit": 900
+      },
+      "price": 900,
+      "createdAt": "2022-12-28T23:14:06.844Z",
+      "id": "vlQIM64"
+    },
+    {
+      "category": "conta",
+      "title": "Conta",
+      "type": {
+        "withDown": "",
+        "deposit": 102
+      },
+      "price": 102,
+      "createdAt": "2022-12-28T23:15:24.590Z",
+      "id": "B3Kc0Gc"
+    },
+    {
+      "category": "te",
+      "title": "titulostes",
+      "type": {
+        "withDown": "",
+        "deposit": 99
+      },
+      "price": 99,
+      "createdAt": "2022-12-28T23:22:27.470Z",
+      "id": "YI5swPQ"
     }
   ]
 }
