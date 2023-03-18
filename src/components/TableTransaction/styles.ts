@@ -32,9 +32,6 @@ export const ContainerTable = styled.div`
             }
         }
 
-        @media(max-width: 480px){
-            
-        }
     }
 
 `
